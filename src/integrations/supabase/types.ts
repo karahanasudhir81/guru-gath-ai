@@ -14,7 +14,317 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      agents: {
+        Row: {
+          accent: string
+          created_at: string
+          description: string
+          id: string
+          is_builtin: boolean
+          name: string
+          owner_id: string | null
+          persona: string
+          slug: string
+          sort_order: number
+          specialty: string
+          tagline: string
+        }
+        Insert: {
+          accent?: string
+          created_at?: string
+          description: string
+          id?: string
+          is_builtin?: boolean
+          name: string
+          owner_id?: string | null
+          persona: string
+          slug: string
+          sort_order?: number
+          specialty: string
+          tagline: string
+        }
+        Update: {
+          accent?: string
+          created_at?: string
+          description?: string
+          id?: string
+          is_builtin?: boolean
+          name?: string
+          owner_id?: string | null
+          persona?: string
+          slug?: string
+          sort_order?: number
+          specialty?: string
+          tagline?: string
+        }
+        Relationships: []
+      }
+      flashcards: {
+        Row: {
+          back: string
+          created_at: string
+          front: string
+          id: string
+          subject: string
+          user_id: string
+        }
+        Insert: {
+          back: string
+          created_at?: string
+          front: string
+          id?: string
+          subject?: string
+          user_id: string
+        }
+        Update: {
+          back?: string
+          created_at?: string
+          front?: string
+          id?: string
+          subject?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          client_id: string | null
+          created_at: string
+          id: string
+          parts: Json
+          role: string
+          thread_id: string
+          user_id: string
+        }
+        Insert: {
+          client_id?: string | null
+          created_at?: string
+          id?: string
+          parts?: Json
+          role: string
+          thread_id: string
+          user_id: string
+        }
+        Update: {
+          client_id?: string | null
+          created_at?: string
+          id?: string
+          parts?: Json
+          role?: string
+          thread_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          kind: string
+          subject: string | null
+          thread_id: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          kind?: string
+          subject?: string | null
+          thread_id?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          subject?: string | null
+          thread_id?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notes_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          plan: string
+          preferred_language: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          plan?: string
+          preferred_language?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          plan?: string
+          preferred_language?: string
+        }
+        Relationships: []
+      }
+      recordings: {
+        Row: {
+          created_at: string
+          duration_seconds: number
+          id: string
+          thread_id: string | null
+          title: string
+          transcript: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number
+          id?: string
+          thread_id?: string | null
+          title: string
+          transcript: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number
+          id?: string
+          thread_id?: string | null
+          title?: string
+          transcript?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recordings_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subject_progress: {
+        Row: {
+          id: string
+          mastery: number
+          minutes: number
+          sessions: number
+          subject: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          mastery?: number
+          minutes?: number
+          sessions?: number
+          subject: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          mastery?: number
+          minutes?: number
+          sessions?: number
+          subject?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      support_tickets: {
+        Row: {
+          category: string
+          created_at: string
+          email: string
+          id: string
+          message: string
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      threads: {
+        Row: {
+          agent_id: string
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          agent_id: string
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          agent_id?: string
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "threads_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
